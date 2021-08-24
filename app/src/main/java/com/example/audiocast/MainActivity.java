@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.net.sip.SipSession;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -145,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         Log.d(TAG, "onCreate");
         setContentView(R.layout.activity_main);
 
@@ -159,8 +161,10 @@ public class MainActivity extends AppCompatActivity {
         adapter = new RlistAdapter(Stations.STATION_LIST, new ClickListener() {
             @Override
             public void onItemClick(int itemIndex) {
-                if(mCastSession!=null&&mCastSession.isConnected())
-                radioCast(Stations.STATION_LIST.get(itemIndex));
+                if(mCastSession!=null&&mCastSession.isConnected()){
+                    radioCast(Stations.STATION_LIST.get(itemIndex));
+                }
+                else Toast.makeText(MainActivity.this, "Kochana Jadziu najperw CASTUJ :)(:", Toast.LENGTH_LONG).show();
             }
         });
         recyclerView.setAdapter(adapter);

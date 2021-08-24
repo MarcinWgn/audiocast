@@ -18,8 +18,8 @@ import java.util.List;
 
 public class RlistAdapter extends RecyclerView.Adapter<RlistAdapter.ViewHolder> {
 
-    private List<RadioStation> radioStations;
-    private ClickListener clickListener;
+    private final List<RadioStation> radioStations;
+    private final ClickListener clickListener;
 
 
     public RlistAdapter(List<RadioStation>radioStations, ClickListener clickListener){
@@ -55,9 +55,9 @@ public class RlistAdapter extends RecyclerView.Adapter<RlistAdapter.ViewHolder> 
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private ImageView imageView;
-        private TextView name;
-        private View view;
+        private final ImageView imageView;
+        private final TextView name;
+        private final View view;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.name_text_view);
