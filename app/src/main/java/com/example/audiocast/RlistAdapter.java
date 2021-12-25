@@ -1,5 +1,6 @@
 package com.example.audiocast;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,10 +43,17 @@ public class RlistAdapter extends RecyclerView.Adapter<RlistAdapter.ViewHolder> 
 
         Picasso.get().load(radioStations.get(position).getImg()).into(holder.imageView);
         holder.name.setText(radioStations.get(position).getName());
+
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 clickListener.onItemClick(position);
+            }
+        });
+        holder.httpView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickListener.onPageClick(position);
             }
         });
     }
@@ -58,11 +67,14 @@ public class RlistAdapter extends RecyclerView.Adapter<RlistAdapter.ViewHolder> 
         private final ImageView imageView;
         private final TextView name;
         private final View view;
+        private final View httpView;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.name_text_view);
             view = itemView.findViewById(R.id.row_view);
             imageView = itemView.findViewById(R.id.station_image_view);
+            httpView = itemView.findViewById(R.id.ramowka_IW);
         }
     }
 }

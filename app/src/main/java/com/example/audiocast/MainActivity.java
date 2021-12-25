@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.net.sip.SipSession;
 import android.os.Bundle;
@@ -165,6 +166,15 @@ public class MainActivity extends AppCompatActivity {
                     radioCast(Stations.STATION_LIST.get(itemIndex));
                 }
                 else Toast.makeText(MainActivity.this, "Kochana Jadziu najperw CASTUJ :)(:", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onPageClick(int pageIndex) {
+                // TODO: 25.12.2021 url intent
+                String url = Stations.STATION_LIST.get(pageIndex).getPage();
+                Uri uri = Uri.parse(url);
+                Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+                startActivity(intent);
             }
         });
         recyclerView.setAdapter(adapter);
