@@ -1,19 +1,14 @@
 package com.example.audiocast;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.common.images.WebImage;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

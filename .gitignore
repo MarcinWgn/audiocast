@@ -1,5 +1,8 @@
 *.iml
-.gradle
+.idea/deploymentTargetDropDown.xml
+.idea/compiler.xml
+.idea/jarRepositories.xml
+.idea/misc.xml
 /local.properties
 /.idea/caches
 /.idea/libraries
