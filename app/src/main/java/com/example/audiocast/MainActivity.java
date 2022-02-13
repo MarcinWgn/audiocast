@@ -46,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
     private SessionManager mSessionManager;
     private CastSession mCastSession;
     private RemoteMediaClient mRemoteMediaClient;
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
     private CastStateListener mCastStateListener;
     private CastContext mCastContext;
 
@@ -144,26 +147,29 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         Log.d(TAG, "onCreate");
         setContentView(R.layout.activity_main);
 
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        Button button = findViewById(R.id.playBtn);
+        button.setOnClickListener(view -> {
+            mRemoteMediaClient.play();
+        });
+
+        recyclerView = findViewById(R.id.recycler_view);
         mSessionManager = CastContext.getSharedInstance(this).getSessionManager();
         mCastContext = CastContext.getSharedInstance(this);
 
 
         recyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
+        layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
-        // TODO: 25.12.2021 url intent
-        RecyclerView.Adapter adapter = new RlistAdapter(Stations.STATION_LIST, new ClickListener() {
+        adapter = new RlistAdapter(Stations.STATION_LIST, new ClickListener() {
             @Override
             public void onItemClick(int itemIndex) {
-                if (mCastSession != null && mCastSession.isConnected()) {
+                if(mCastSession!=null&&mCastSession.isConnected()){
                     radioCast(Stations.STATION_LIST.get(itemIndex));
-                } else
-                    Toast.makeText(MainActivity.this, "Kochana Jadziu najperw CASTUJ :)(:", Toast.LENGTH_LONG).show();
+                }
+                else Toast.makeText(MainActivity.this, "Kochana Jadziu najperw CASTUJ :)(:", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -171,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
                 // TODO: 25.12.2021 url intent
                 String url = Stations.STATION_LIST.get(pageIndex).getPage();
                 Uri uri = Uri.parse(url);
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                Intent intent = new Intent(Intent.ACTION_VIEW,uri);
                 startActivity(intent);
             }
         });
